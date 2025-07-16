@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Examples
+    </title>
+  </head>
+  <body>
+
+    <p>
+      Heads and Tails Game
+    </p>
+
+    <button onclick = "
+      pickguess('heads')">
+      Heads
+    </button>
+
+    <button onclick = "
+      pickguess('tails')">
+      Tails
+    </button>
+
+    <button onclick = "
+    score.Wins = 0,
+    score.Losses = 0
+alert('Score is Reset.')">
+    Reset</button>
+
+    <script>
+      let score = JSON.parse(localStorage.getItem('coinscore')) || {
+        Wins : 0,
+        Losses: 0
+      };
+
+      function pickguess(guess){
+        let computerMove = pickComputerMove();
+        let result;
+        if(guess === computerMove){
+        result = 'You win!';
+        score.Wins += 1;
+        }
+        else{
+          result = 'You lose!';
+          score.Losses += 1;
+        }
+
+        localStorage.setItem('coinscore', JSON.stringify(score));
+
+        alert(`You picked: ${guess}, Computer Picked: ${computerMove}
+Wins: ${score.Wins} Losses: ${score.Losses}`);
+      }
+
+      
+      function pickComputerMove(){
+        let randomNumber = Math.random();
+        let computerMove;
+        if(randomNumber < 0.5){
+          computerMove = 'heads';
+        }
+        else
+        {
+          computerMove = 'tails';
+        }
+
+        return computerMove;
+      }
+    </script>
+  </body>
+</html>
